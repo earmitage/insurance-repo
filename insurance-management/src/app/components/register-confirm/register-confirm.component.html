@@ -1,0 +1,27 @@
+<app-navigation></app-navigation>
+
+<div class="login-container">
+   <br />
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Please enter the One Time Pin that was sent to you</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <form *ngIf="registrationConfirmForm" [formGroup]="registrationConfirmForm">
+        <mat-form-field appearance="outline">
+          <mat-label>One time Pin</mat-label>
+          <input matInput formControlName="token" placeholder="Enter the OTP" />
+        </mat-form-field>
+
+        <div *ngIf="confFailed" style="color:#f86c6b">{{error}}</div>
+        <button type="button" mat-raised-button color="warning" (click)="onRegister()"><span *ngIf="loading"
+            class="spinner-border spinner-border-sm mr-1"></span>Create Account</button>
+        <div style="color:  rgb(150, 73, 0);">Already have an account?
+          <button type="button" class="btn btn-link px-0" (click)="login()">Login</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

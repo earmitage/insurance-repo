@@ -1,0 +1,60 @@
+
+
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between; /* Makes the items align to the left and right */
+    align-items: center; /* Vertically centers the content */
+    padding: 10px 20px;
+    background-color: #333; /* Example background color */
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Ensure the container spans the entire width of the navbar */
+    align-items: center;
+  }
+  
+  .navbar-menu {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-item {
+    margin-right: 20px;
+  }
+  
+  .navbar-link {
+    color: #fff; /* White color for the links */
+    //color: #D4AF37;
+    text-decoration: none;
+  }
+
+  .logout-btn {
+    margin-left: auto; /* Push the logout button to the far right */
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .profile-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .logout-btn:hover {
+    color: #f00; /* Example hover color for the logout button */
+  }
+
+  .user-info {
+    margin-left: auto; /* Push the logout button to the far right */
+    background: none;
+    border: none;
+  }
+  

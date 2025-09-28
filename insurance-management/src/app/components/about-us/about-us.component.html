@@ -1,0 +1,81 @@
+<app-navigation></app-navigation>
+
+
+<mat-card class="about-us-card">
+  <mat-card-header>
+    <mat-card-title>About Us</mat-card-title>
+    <mat-card-subtitle>CYA22KA Holdings</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>
+      CYA22KA Holdings is a pioneering, 100% female-owned South African company specializing in a central database for deceased policyholders and pre-deceased beneficiary notifications.
+    </p>
+
+    <section class="mission-section">
+      <div class="mission-text">
+        <h3>Our Mission</h3>
+        <p>
+          We provide peace of mind and financial security by ensuring policyholders are informed when beneficiaries predecease them, and by maintaining a reliable central database.
+        </p>
+      </div>
+      <div class="mission-image">
+        <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=600&q=80"
+             alt="Family Support Image" />
+      </div>
+    </section>
+
+    <h3>Nature of Business</h3>
+    <p>
+      We support insurers with accurate deceased policyholder data and proactive notifications to help process claims efficiently.
+    </p>
+
+    <h3>Problem Statement</h3>
+    <p>
+      With over R88.56 billion in unclaimed assets in South Africa, our system bridges the gap by tracking and notifying relevant parties, ensuring insurance legacies are honored.
+    </p>
+
+    <h3>Our Services</h3>
+    <ul>
+      <li>Central database for deceased policyholders</li>
+      <li>Pre-deceased beneficiary alerts</li>
+      <li>Funeral and life policy lookup</li>
+    </ul>
+
+    <h3>Slogans</h3>
+    <blockquote>We Love to See You Smile</blockquote>
+    <blockquote>Together We Grow</blockquote>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary">Register Your Policy</button>
+    <button mat-stroked-button color="accent">Check Your Cover</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-divider></mat-divider>
+
+<section class="carousel-section">
+  <h2>Our Gallery</h2>
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" *ngFor="let image of images">
+        <img [src]="image.src" [alt]="image.alt" class="carousel-image" />
+      </div>
+    </div>
+
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="#">About Us</a>
+    <a href="#">Contact Us</a>
+    <a href="#">Data Protection Policy</a>
+    <a href="#">Contract Agreement</a>
+  </div>
+  <p>&copy; 2025 CYA22KA Holdings | Powered by Mel Global Connect</p>
+</footer>

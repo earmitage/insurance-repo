@@ -1,0 +1,111 @@
+<app-navigation></app-navigation>
+<div class="card px-5 py-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h4 class="card-title">My Policies </h4>
+        </div>
+
+    </div>
+    <table mat-table [dataSource]="policies" multiTemplateDataRows class="mat-elevation-z8">
+        @for (column of columnsToDisplay; track column) {
+        <ng-container matColumnDef="{{column}}">
+           
+            <ng-container *ngIf="column != 'policyType' && column != 'coverageAmount' && column != 'monthlyPremium'">
+                <th  mat-header-cell *matHeaderCellDef>{{tableHeaders[column]}}</th>
+                <td mat-cell *matCellDef="let element">{{element[column]}}</td>
+            </ng-container>
+            <ng-container *ngIf="column == 'policyType'">
+                <th mat-header-cell *matHeaderCellDef>{{tableHeaders[column]}}</th>
+                <td mat-cell *matCellDef="let element">{{policyServices.policyType(element[column])}}</td>
+            </ng-container>
+
+            <ng-container  *ngIf="column == 'coverageAmount'">
+                <th class="text-end" mat-header-cell *matHeaderCellDef>{{tableHeaders[column]}}</th>
+                <td mat-cell class="text-end" *matCellDef="let element">{{global.formatMoney(element[column]) }}</td>
+            </ng-container>
+
+            <ng-container *ngIf="column == 'monthlyPremium'">
+                <th class="text-end" mat-header-cell *matHeaderCellDef>{{tableHeaders[column]}}</th>
+                <td mat-cell class="text-end" *matCellDef="let element">{{global.formatMoney(element[column]) }}</td>
+            </ng-container>
+
+            
+        </ng-container>
+        }
+        <ng-container matColumnDef="expand">
+            <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button aria-label="expand row" (click)="toggle(element); $event.stopPropagation()"
+                    class="example-toggle-button" [class.example-toggle-button-expanded]="isExpanded(element)">
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+            </td>
+
+    
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let element">
+                <!-- Edit Button -->
+                <button mat-raised-button color="primary" (click)="editPolicy(element)">Edit</button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+                <div class="example-element-detail-wrapper"
+                    [class.example-element-detail-wrapper-expanded]="isExpanded(element)">
+                    <div class="example-element-detail">
+                        <div class="panel-collapse ben-panel">
+                            <b>Beneficiaries</b>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Relationship</th>
+                                        <th>Share Percentage</th>
+                                        <th>Id Type</th>
+                                        <th>ID Number</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Login Allowed</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let beneficiary of element.beneficiaries">
+                                        <td>{{ beneficiary.fullName }}</td>
+                                        <td>{{ beneficiary.relationship }}</td>
+                                        <td>{{ beneficiary.sharePercentage }}%</td>
+                                        <td>{{ beneficiary.idType }}</td>
+                                        <td>{{ beneficiary.idNumber }}</td>
+                                        <td>{{ beneficiary.phone }}</td>
+                                        <td>{{ beneficiary.email }}</td>
+                                        <td>{{ beneficiary.loginAllowed }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
+            [class.example-expanded-row]="isExpanded(element)" (click)="toggle(element)">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+    <br />
+    <div class="col-md-4" *ngIf="subscriptions.length  > 0">
+        <button class="btn btn-outline-primary pull-right" mat-raised-button color="primary" (click)="addPolicy()"><i class="icon-plus"></i> Add
+            Policy</button>
+    </div>
+    <div class="col-md-4" *ngIf="subscriptions?.length == 0">
+        <b>You don't have any active subscriptions</b>&nbsp;&nbsp;
+        <button class="btn btn-outline-primary pull-right" mat-raised-button color="primary" (click)="subscribe()"><i class="icon-plus"></i> Subscribe</button>&nbsp;&nbsp; <b>to add a new policy.</b>
+    </div>
+
+</div>

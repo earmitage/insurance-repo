@@ -1,0 +1,57 @@
+<app-navigation></app-navigation>
+
+<div class="login-container">
+  <div class="welcome-text">
+    <h2>Welcome to MyInsuretech Online</h2>
+    <p>We are a central database for policyholders and their beneficiaries</p>
+  </div>
+ 
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title><h4>Login</h4></mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" placeholder="Enter your username" />
+          <mat-error *ngIf="loginForm.get('username')?.hasError('username')">
+            Username is required.
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('username')?.hasError('username')">
+            Please enter a valid username.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="Enter your password" />
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            Password is required.
+          </mat-error>
+        </mat-form-field>
+        <div class="row">
+
+           <span class="text-center error" style="color:red">{{error}}</span>
+        </div>
+        <div class="row">
+         
+          <div class="col-md-6">
+            <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-primary col-md-6" mat-raised-button color="primary" (click)="register()">Register an Account</button>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <br />
+            <br />
+            <br />
+            <a href="/forgot-password" style="color:  rgb(150, 73, 0);"  (click)="forgotPassword()"><b>Forgot Password?</b></a>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

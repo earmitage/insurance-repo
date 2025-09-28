@@ -1,0 +1,61 @@
+name: CI/CD Pipeline
+on:
+  push:
+    branches:
+      - dev
+      - sit
+  workflow_dispatch:
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3  
+      
+      - name: Configure AWS credentials based on environment (for SIT branch only)
+        if: ${{ github.ref_name == 'sit' }}  # Only run this step if branch is 'sit'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.SIT_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.SIT_AWS_SECRET_ACCESS_KEY }}
+          aws-region: af-south-1
+          
+      - name: Configure AWS credentials based on environment (for DEV branch only)
+        if: ${{ github.ref_name == 'dev' }}  # Only run this step if branch is 'sit'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: af-south-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+      
+      - name: Build the docker image
+        run: |
+          REPO_NAME=$(basename $GITHUB_REPOSITORY)
+          docker build . --file Dockerfile --tag ${REPO_NAME}:${{ github.sha }}
+      
+      - name: Tag docker image based on environment
+        run: |
+            REPO_NAME=$(basename $GITHUB_REPOSITORY)
+            if [[ ${{ github.ref_name }} == "dev" ]]; then
+              docker tag $REPO_NAME:${{ github.sha }} ${{secrets.ACCOUNT_NUMBER}}.dkr.ecr.af-south-1.amazonaws.com/$REPO_NAME:latest
+            elif [[ ${{ github.ref_name }} == "sit" ]]; then
+              docker tag $REPO_NAME:${{ github.sha }} ${{secrets.SIT_ACCOUNT_NUMBER}}.dkr.ecr.af-south-1.amazonaws.com/$REPO_NAME:${{ github.sha }}
+            fi
+
+      - name: Push image to registry based on environment
+        run: |
+            REPO_NAME=$(basename $GITHUB_REPOSITORY)
+            if [[ ${{ github.ref_name }} == "dev" ]]; then
+              docker push ${{secrets.ACCOUNT_NUMBER}}.dkr.ecr.af-south-1.amazonaws.com/$REPO_NAME:latest
+            elif [[ ${{ github.ref_name }} == "sit" ]]; then
+              docker push ${{secrets.SIT_ACCOUNT_NUMBER}}.dkr.ecr.af-south-1.amazonaws.com/$REPO_NAME:latest 
+            fi
+
+      #https://github.com/aws-actions/amazon-ecs-deploy-task-definition/issues/21
+      - name: Force deployment
+        run: |
+          REPO_NAME=$(basename $GITHUB_REPOSITORY)
+          aws ecs update-service --cluster payments-ecs-dev --service $REPO_NAME --force-new-deployment

@@ -1,0 +1,58 @@
+<div mat-dialog-content>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Terms of Service</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+     
+      <b>Consent to Process Personal Information (POPIA-Compliant)</b><br /><br />
+
+“By ticking the checkbox below, you confirm that:<br /><br />
+
+
+<mat-checkbox [(ngModel)]="tos"></mat-checkbox>
+<button type="button" mat-raised-button color="warning" (click)="acceptTos()">I Agree</button>
+I hereby give explicit consent to MyInsureTechOnline to collect, store, and process my personal information in accordance with the Protection of Personal Information Act (POPIA).
+<p><br />
+This includes the following types of personal data (where applicable):
+My full name and South African ID number
+
+Contact details (email, phone number)
+
+Policyholder or beneficiary details
+
+Funeral or life insurance policy information
+
+Verified death records for myself or a family member (where applicable)<br />
+</p>
+
+<b>Purpose of Processing</b><br /><br />
+<p>
+My personal information may be used for the following lawful purposes:
+
+To verify insurance policy details for deceased individuals
+
+To notify me of any outdated or invalid beneficiary records
+
+To enable executors or legal professionals to process legitimate claims
+
+To send relevant communications related to policy updates or account activity
+
+To ensure compliance with data-sharing agreements between insurers and legal partners.<br />
+</p>
+<b>Your Privacy Rights</b><br /><br />
+<p>
+I understand that:
+
+My data will be stored securely and only accessed by authorised personnel
+
+I may request to access, correct, or delete my information at any time
+
+I may withdraw this consent by emailing the <br /> Information Officer at<br /> [info&#64;cyaholdings.co.za]<br />
+
+I have read and understood the full Privacy Policy available on your website”
+</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+

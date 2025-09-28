@@ -1,0 +1,4 @@
+fullName,idNumber,relationship,dateOfBirth,sharePercentage,idType,countryCode,phone,email,loginAllowed
+John Smith,9012345678901,Spouse,1985-06-15,50,SAID,+27,0821234567,john@example.com,true
+Mary Smith,8912345678902,Child,2010-03-22,25,SAID,+27,0827654321,mary@example.com,false
+David Smith,8812345678903,Child,2012-08-10,25,SAID,+27,,david@example.com,false

@@ -1,0 +1,46 @@
+spring:
+  h2:
+    console:
+      enabled: 
+
+app:
+  url: /insurance-backend
+  insdeployAdmin: 'insDeployAdmin'
+  insdeployToken: 'cyaIns4345522'
+  insdeployContact: '+27733353882'
+  notifications:
+    notificationsAppName: 'Insurance'
+    twilioAccountSid: 'ACe45e6a24671da4bbb978dfabb085436d'
+    twilioAuthToken: '68fc7f1f55d1b7c4ffb04d99e2c7747a'
+    twilioSourceNumber: '+27600868713'
+    smsEnabled: false
+jwtTokenHeader: Authorization
+jwtSecret: app-secret
+jwtExpiration: 604800
+
+jwt:
+  private.key: classpath:app.key
+  public.key: classpath:app.pub
+google:
+  recaptcha:
+    key:
+      enabled: false
+payfast:
+  merchantId:
+  merchantKey:
+  payfastUrl:
+  secretKey:
+      
+logging:
+  level:
+    com.earmitage: INFO
+    org.springframework.web.filter.CommonsRequestLoggingFilter: INFO
+    #org.springframework.security: DEBUG
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: '/swagger-ui.html'
+api-docs.path: '/v3/api-docs'
+    

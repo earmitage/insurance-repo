@@ -1,0 +1,80 @@
+spring:
+
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+  mail:
+    host: smtp.example.com
+    port: 587
+    username: your-email@example.com
+    password: your-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            
+  h2:
+    console:
+      enabled:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 50MB
+  jpa:
+    show-sql: false  # Leave this false when using logging frameworks
+    properties:
+      hibernate:
+        format_sql: false
+  logging:
+    level:
+      org.hibernate.SQL: DEBUG
+      org.hibernate.orm.jdbc.bind: TRACE
+app:
+  url: /insurance-backend
+  insdeployAdmin: 'test'
+  insdeployToken: 'test'
+  insdeployContact: '+27835540735'
+  
+  notifications:
+    notificationsAppName: 'Insurance'
+    twilioAccountSid: 'ACe45e6a24671da4bbb978dfabb085436d'
+    twilioAuthToken: 'twillll'
+    twilioSourceNumber: '+27600868713'
+    mailerSendApi: 'mlsn.apitken'
+    fromEmail: 'no-reply@myinsuretechonline.co.za'
+    smsEnabled: false
+jwtTokenHeader: Authorization
+jwtSecret: app-secret
+jwtExpiration: 604800
+
+jwt:
+  private.key: classpath:app.key
+  public.key: classpath:app.pub
+google:
+  recaptcha:
+    key:
+      enabled: false
+payfast:
+   merchantId: '10000100'
+   merchantKey: '46f0cd694581a'
+   payfastUrl: 'https://sandbox.payfast.co.za/eng/process'
+   secretKey: 'jt7NOE43FZPn'
+   replyUrl: 'https://9756d317a9e5.ngrok-free.app/policies'
+   baseAppUrl: 'https://88315b30e583.ngrok-free.app/insurance-backend/'
+   domains: ['www.payfast.co.za','sandbox.payfast.co.za','w1w.payfast.co.za','w2w.payfast.co.za']
+   validationUrl: 'https://sandbox.payfast.co.za/eng/query/validate'
+      
+logging:
+  level:
+    com.earmitage: INFO
+    org.springframework.web.filter.CommonsRequestLoggingFilter: INFO
+    #org.springframework.security: DEBUG
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: '/swagger-ui.html'
+api-docs.path: '/v3/api-docs'

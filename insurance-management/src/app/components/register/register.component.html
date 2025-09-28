@@ -1,0 +1,135 @@
+<app-navigation></app-navigation>
+
+
+<div class="login-container">
+
+  <!-- Form -->
+  <br />
+  <div class="row">
+    <div class="col-12">
+
+      <mat-card class="login-card">
+        <mat-card-header>
+          <mat-card-title>Register your account</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <form class="form-horizontal mt-3" [formGroup]="registrationForm" (ngSubmit)="onRegister()">
+
+            <mat-form-field appearance="outline">
+              <mat-label>First name</mat-label>
+              <input matInput formControlName="firstname" placeholder="Enter your firstname" />
+
+              <mat-error *ngIf="registrationForm.get('firstname')?.hasError('required') && registrationForm.get('firstname')?.touched">
+                First name is required.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastname" placeholder="Enter your lastname" />
+              <mat-error *ngIf="registrationForm.get('lastname')?.hasError('required') && registrationForm.get('lastname')?.touched">
+                Last name is required.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput  type="email" formControlName="email" placeholder="Enter your email" />
+
+              <mat-error *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched">
+                Email is required.
+              </mat-error>
+
+              <mat-error *ngIf="registrationForm.get('email')?.hasError('email') && registrationForm.get('email')?.touched">
+                Email is not a valid email address.
+              </mat-error>
+            </mat-form-field>
+
+
+
+            <div class="form-row d-flex align-items-center">
+
+              <mat-form-field appearance="outline">
+                <mat-label>Country Code</mat-label>
+                <mat-select formControlName="countryCode" class="country-code-select">
+                  <mat-option *ngFor="let country of africanCountryCodes" [value]="country.countryCode">
+                    {{ country.countryCode }} ({{country.name}})
+                  </mat-option> 
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Phone</mat-label>
+                <input matInput type="number" formControlName="phone" placeholder="Enter your phone" class="phone-input" />
+
+                <mat-error *ngIf="registrationForm.get('phone')?.hasError('required') && registrationForm.get('phone')?.touched">
+                  Phone number is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline">
+              <mat-label>ID Number</mat-label>
+              <input matInput formControlName="idNumber" placeholder="Enter your Id Number" />
+              <mat-error *ngIf="registrationForm.get('idNumber')?.hasError('required') && registrationForm.get('idNumber')?.touched">
+                Id Number is required.
+              </mat-error>
+           
+            </mat-form-field>
+        
+ 
+            <mat-form-field appearance="outline">
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="username" placeholder="Enter your username" />
+              <mat-error *ngIf="registrationForm.get('username')?.hasError('required') && registrationForm.get('username')?.touched">
+                username is required.
+              </mat-error>
+           
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput formControlName="password" placeholder="Enter your password" />
+              <mat-error *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched">
+                Password is required.
+              </mat-error>
+              <mat-error *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched">
+                Password must be at least 8 characters long.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Confirm Password</mat-label>
+              <input type="password" matInput formControlName="passwordConfirm" placeholder="Confirm your password" />
+
+              <mat-error *ngIf="registrationForm.get('passwordConfirm')?.hasError('required') && registrationForm.get('passwordConfirm')?.touched">
+                Confirm Password is required.
+              </mat-error>
+              
+              <!-- Passwords do not match -->
+              <mat-error *ngIf="registrationForm.get('passwordConfirm')?.hasError('passwordMismatch') && registrationForm.get('passwordConfirm')?.touched">
+                Passwords do not match.
+              </mat-error>
+            </mat-form-field>
+
+
+            <div *ngIf="regFailed" style="color:#f86c6b">{{error}}</div>
+
+            <button type="button" mat-raised-button color="warning" (click)="onRegister()" [disabled]="registrationForm.invalid"><span *ngIf="loading"
+                class="spinner-border spinner-border-sm mr-1"></span>Create Account</button>
+            <hr />
+            <div class="d-flex align-items-center">
+              <b>Already have an account?</b>
+              <button type="button" mat-raised-button color="warning" (click)="login()" >Login</button>
+            </div>
+          </form>
+
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<mat-card class="update-card">
+    <mat-card-header>
+        <mat-card-title>Update Deceased Status</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-dialog-content>
+            Policyholder: {{ data.user.fullName }} ({{ data.user.idNumber }})
+            <!-- Policyholder Option -->
+            <div class="form-section">
+                <mat-checkbox [(ngModel)]="isPolicyholderDeceased" (change)="onPolicyholderToggle()">
+                    Policyholder is deceased
+                </mat-checkbox>
+
+            </div>
+            <hr />
+
+            <!-- Beneficiary Option -->
+            <div class="form-section" *ngIf="!isPolicyholderDeceased">
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Select Beneficiary</mat-label>
+                    <input type="text" matInput [(ngModel)]="beneficiarySearchText" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete"
+                        (optionSelected)="onBeneficiarySelected($event.option.value)">
+                        <mat-option *ngFor="let ben of filteredBeneficiaries()" [value]="ben">
+                            {{ ben.fullName }} - {{ ben.idNumber }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+
+            <!-- Date of Death -->
+            <div class="form-section">
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Date of Death</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="dateOfDeath">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </mat-dialog-content>
+
+        <mat-dialog-actions align="end">
+            <button mat-button (click)="dialogRef.close()">Cancel</button>
+            <button mat-raised-button color="primary" [disabled]="!canSubmit()" (click)="submit()">Update</button>
+        </mat-dialog-actions>
+    </mat-card-content>
+</mat-card>

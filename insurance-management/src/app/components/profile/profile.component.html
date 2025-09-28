@@ -1,0 +1,146 @@
+<app-navigation></app-navigation>
+
+<div class="login-container">
+    <mat-card class="profile-card">
+        <mat-card-header>
+            <mat-card-title>Update your account</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>First Name</mat-label>
+                        <input matInput formControlName="firstname" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="lastname" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>ID Number</mat-label>
+                        <input matInput formControlName="idNumber" />
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Phone</mat-label>
+                        <input matInput formControlName="phone" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="email" />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Date of Birth</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" [min]="minDate"
+                            [max]="maxDate" />
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            
+                <button mat-raised-button color="primary" type="submit">Save
+                    Details</button>
+
+            </form>
+            <hr />
+            <mat-card-header>
+                <mat-card-title>Subscriptions</mat-card-title>
+            </mat-card-header>
+
+            <div style="text-align: left;" *ngIf="subscriptions.length > 0">
+                <u><b style="text-align: left;">Existing subscriptions</b></u>
+                <ul>
+                    <li *ngFor="let subscription of subscriptions" style="text-align: left;">
+                        <strong>{{ subscription.product.name }}</strong> (Subscribed: {{ subscription.subscriptionDate |
+                        date: 'MMM d, y, h:mm' }})
+                    </li>
+                </ul>
+                Thank you for your premium subscription.
+            </div>
+
+            <div style="text-align: left;" *ngIf="subscriptions.length == 0">
+                <b style="text-align: left;">You don't have any active subscriptions</b>
+
+                <mat-card class="product-card">
+                    <mat-card-header>
+                        <mat-card-title>{{ product?.name }}</mat-card-title>
+                        <mat-card-subtitle>{{ product?.description }}</mat-card-subtitle>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <p><strong>Annual:</strong> R{{ product?.annualCost | number: '1.2-2' }}</p>
+                    </mat-card-content>
+
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="payNow()">Pay Now</button>
+                    </mat-card-actions>
+                </mat-card>
+                <br /><br />
+            </div>
+            <hr />
+
+
+            <mat-card-header>
+                <mat-card-title>Files</mat-card-title>
+            </mat-card-header>
+
+            <div style="text-align: left;" *ngIf="existingFiles.length > 0">
+                <u><b style="text-align: left;">Uploaded Files</b></u>
+                <ul>
+                    <li *ngFor="let file of existingFiles" style="text-align: left;">
+                        <strong>{{ file.filename }}</strong> (Type: {{ file.type }})
+                        <button mat-icon-button (click)="deleteFile(file.uuid)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+
+                    </li>
+                </ul>
+            </div>
+
+
+            <div style="text-align: left;" *ngIf="existingFiles.length == 0">
+                <br />
+                <b style="text-align: left;">You don't have any uploaded files</b>
+                <br />
+            </div>
+
+
+            <div *ngIf="uploadedFiles.length < 3">
+                <br />
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="form-field" style="max-width: 200px;">
+                        <mat-label>Document Type</mat-label>
+                        <mat-select [(value)]="selectedDocType">
+                            <mat-option *ngFor="let type of fileTypes" [value]="type">{{ type }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <input #fileInput type="file" (change)="onFileChange($event)" hidden />
+                    <button mat-raised-button color="primary" (click)="fileInput.click()" [disabled]="!selectedDocType"
+                        class="form-field" style="max-width: 200px;">
+                        <mat-icon>upload</mat-icon> Select File
+                    </button>
+                </div>
+            </div>
+
+            <!-- Uploaded file list -->
+            <div *ngIf="uploadedFiles.length > 0" class="file-preview">
+                <div *ngFor="let file of uploadedFiles; let i = index" class="file-item">
+                    <mat-icon>insert_drive_file</mat-icon>
+                    <span>{{ file.file.name }} ({{ file.type }})</span>
+                    <button mat-icon-button (click)="removeFile(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <button mat-raised-button color="primary" type="button" (click)="uploadFiles()">Upload Files</button>
+        </mat-card-content>
+    </mat-card>
+</div>

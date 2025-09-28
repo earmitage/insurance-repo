@@ -1,0 +1,4 @@
+policyNumber,insuranceCompany,policyType,coverageAmount,monthlyPremium,status,addressLine1,city,region,postalCode,country
+POL001,ABC Insurance,LIFE_INSURANCE,500000,250.50,ACTIVE,123 Main St,Cape Town,Western Cape,8001,South Africa
+POL002,XYZ Insurance,HEALTH_INSURANCE,200000,150.75,ACTIVE,456 Oak Ave,Johannesburg,Gauteng,2000,South Africa
+POL003,DEF Insurance,AUTO_INSURANCE,100000,85.25,ACTIVE,789 Pine Rd,Durban,KwaZulu-Natal,4000,South Africa

@@ -1,0 +1,165 @@
+<app-navigation></app-navigation>
+<div class="card px-5 py-5">
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <h4 class="card-title">All Users</h4>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="fill" floatLabel="always" class="search-field">
+                <mat-label>Search</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+            </mat-form-field>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="/admin/companies" class="btn btn-secondary me-2">
+                <mat-icon>business</mat-icon>
+                Manage Companies
+            </a>
+            <a href="/admin/file-upload" class="btn btn-primary">
+                <mat-icon>cloud_upload</mat-icon>
+                Bulk Import
+            </a>
+        </div>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+        @for (column of columnsToDisplay; track column) {
+        <ng-container matColumnDef="{{column}}">
+
+            <ng-container *ngIf="column == 'dateOfJoining'">
+                <th mat-header-cell *matHeaderCellDef>{{tableHeaders[column]}}</th>
+                <td mat-cell *matCellDef="let element">{{element[column] | date: 'dd-MM-yyyy HH:mm'}}</td>
+            </ng-container>
+
+
+            <ng-container *ngIf="column != 'dateOfJoining'">
+                <th mat-header-cell *matHeaderCellDef>{{tableHeaders[column]}}</th>
+                <td mat-cell *matCellDef="let element">{{element[column]}}</td>
+            </ng-container>
+        </ng-container>
+
+
+
+        }
+        <ng-container matColumnDef="Policies">
+            <th mat-header-cell *matHeaderCellDef>Policies</th>
+            <td mat-cell *matCellDef="let element"> <span class="pill">{{ element.policies.length}}</span></td>
+        </ng-container>
+        <ng-container matColumnDef="expand">
+            <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button aria-label="expand row" (click)="toggle(element); $event.stopPropagation()"
+                    class="example-toggle-button" [class.example-toggle-button-expanded]="isExpanded(element)">
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+                <div class="example-element-detail-wrapper"
+                    [class.example-element-detail-wrapper-expanded]="isExpanded(element)">
+                    <div class="example-element-detail">
+                        <div class="panel-collapse ben-panel">
+                            <b>Policies</b>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Policy Type</th>
+                                        <th>Insurance Company</th>
+                                        <th>Policy Number</th>
+                                        <th class="text-end">Coverage Amount</th>
+                                        <th class="text-end">Monthly Premium</th>
+                                        <th>Status</th>
+                                        <th>Beneficiaries</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let policy of element.policies">
+                                        <td>{{ policyServices.policyType(policy.policyType) }}</td>
+                                        <td>{{ policy.insuranceCompany }}</td>
+                                        <td>{{ policy.policyNumber }}</td>
+                                        <td class="text-end">{{ global.formatMoney(policy.coverageAmount) }}</td>
+                                        <td class="text-end">{{ global.formatMoney(policy.monthlyPremium) }}</td>
+                                        <td>{{ policy.status }}</td>
+                                        <!--td><span class="pill" style="background-color: chocolate;">{{ policy.beneficiaries.length}}</span></td-->
+
+                                        <td>
+                                            <span class="pill" style="background-color: chocolate; cursor: pointer;"
+                                                (click)="openBeneficiariesPopup(policy.beneficiaries)">
+                                                {{ policy.beneficiaries.length }}
+                                            </span>
+
+                                        </td>
+
+
+                                        <td>
+                                            <ng-container matColumnDef="edit">
+                                        <th mat-header-cell *matHeaderCellDef>Actions</th>
+                                        <td mat-cell>
+                                            <button mat-raised-button color="primary"
+                                                (click)="openDeceasedDialog(policy)">Update Deceased</button>
+                                        </td>
+        </ng-container>
+
+
+
+
+        </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div>
+        <b>Subscriptions</b>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Subscription Date</th>
+                    <th>Subscription Expiry</th>
+                    <th class="text-end">Amount Paid</th>
+                    <th>Product</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let subscription of element.subscriptions">
+                    <td>{{ subscription.subscriptionDate | date : 'dd-MM-yyyy HH:mm'}}</td>
+                    <td>{{ subscription.subscriptionExpiryDate | date : 'dd-MM-yyyy HH:mm' }}</td>
+                    <td class="text-end">{{ global.formatMoney(subscription.amountPaid) }}</td>
+                    <td>{{ subscription.product.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+</td>
+
+
+
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+<tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
+    [class.example-expanded-row]="isExpanded(element)" (click)="toggle(element)">
+</tr>
+<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+
+
+</div>

@@ -1,0 +1,11 @@
+version: 3
+agent:
+  authtoken: 2vjRPwJ4duq73qcwhyV7GYppa1U_6ndrMd1SZWhpMhmCJZWnJ
+tunnels:
+  frontend:
+    addr: 4200
+    proto: http
+  backend:
+    addr: 8080
+    proto: http
+#ngrok start --all --config=ngrok.yml

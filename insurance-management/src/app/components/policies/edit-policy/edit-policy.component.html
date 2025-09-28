@@ -1,0 +1,192 @@
+<app-navigation></app-navigation>
+
+
+<div class="login-container">
+
+  <mat-card-content class="policy-card">
+    <b style="text-align: left;">Edit policy details</b>
+    <hr />
+
+    <form [formGroup]="policyForm">
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" >
+          <mat-label class="ben-table">Policy Type</mat-label>
+          <mat-select formControlName="policyType" required>
+            <mat-option class="ben-table" *ngFor="let policyType of policyHolderServices.policyTypeKeys()" [value]="policyType">
+              {{policyHolderServices.policyTypes[policyType]}}
+            </mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="policyForm.get('policyType')?.hasError('required') && policyForm.get('policyType')?.touched">
+            Policy type is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="ben-table">
+          <mat-label class="ben-table">Policy Number</mat-label>
+          <input matInput formControlName="policyNumber" placeholder="Enter the policyNumber" required />
+          <mat-error *ngIf="policyForm.get('policyNumber')?.hasError('required') && policyForm.get('policyNumber')?.touched">
+            Policy Number is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="ben-table">
+          <mat-label class="ben-table"> Insurance Company </mat-label>
+          <input matInput formControlName="insuranceCompany" placeholder="Enter the  Insurance Company" required />
+          <mat-error *ngIf="policyForm.get('insuranceCompany')?.hasError('required') && policyForm.get('insuranceCompany')?.touched">
+            Insurance Company is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label class="ben-table">Coverage Amount</mat-label>
+          <input matInput type="number" formControlName="coverageAmount" placeholder="Enter the coverage amount" />
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+
+        <mat-form-field appearance="outline">
+          <mat-label class="ben-table">Monthly Premium</mat-label>
+          <input matInput type="number" formControlName="monthlyPremium" placeholder="Enter the monthly premium" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label class="ben-table">Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="Active">Active</mat-option>
+            <mat-option value="Inactive">Inactive</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label class="ben-table">Address</mat-label>
+          <input matInput autocomplete="off" #addresstext formControlName="addressLine1"
+            placeholder="Start typing address for autocomplete" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label class="ben-table">City</mat-label>
+          <input matInput formControlName="city" placeholder="Enter the city" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label class="ben-table">Postal Code</mat-label>
+          <input matInput formControlName="postalCode" placeholder="Enter the postal code" />
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <b style="text-align: left;">Beneficiaries</b>
+        <hr />
+        <table class="table" >
+          <thead>
+
+            <tr >
+              <th mat-header-cell class="ben-table">Name</th>
+              <th mat-header-cell  class="ben-table"> Relationship</th>
+              <th mat-header-cell  class="ben-table">Share %</th>
+              <th mat-header-cell  class="ben-table">Id Type</th>
+              <th mat-header-cell  class="ben-table">{{idNumberHeading}}</th>
+              <th mat-header-cell  class="ben-table">Phone</th>
+              <th mat-header-cell  class="ben-table">Email</th>
+              <th mat-header-cell  class="ben-table">Allow login</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody formArrayName="beneficiaries" >
+            <tr *ngFor="let beneficiary of beneficiaries.controls; let i = index" [formGroupName]="i">
+
+              <td><input matInput formControlName="fullName" class="form-control ben-table" /></td>
+
+              <td><input matInput formControlName="relationship" class="form-control small-input ben-table"
+                  /></td>
+
+
+              <td><input matInput formControlName="sharePercentage" type="number" class="form-control tiny-input ben-table"
+                  placeholder="%" />
+              </td>
+
+
+              <mat-select formControlName="idType" (selectionChange)="onIdTypeSelectionChange($event)"
+                class="small-input ben-table">
+                <mat-option class="small-input ben-table" value="SAID" selected>S.A ID</mat-option>
+                <mat-option class="small-input ben-table" value="Passport">Passport</mat-option>
+              </mat-select>
+
+
+              <td><input matInput formControlName="idNumber" class="form-control ben-table small-input"
+                  placeholder="{{idNumberPlaceHolder}}" />
+              </td>
+
+              <td>
+                <div class="input-group d-flex align-items-center">
+                <select formControlName="countryCode" class="form-control input-group-text ben-table tiny-input">
+                  <option *ngFor="let country of africanCountryCodes" [value]="country.countryCode">
+                    {{ country.countryCode }}
+                  </option>
+                </select>
+                <input matInput type="number" formControlName="phone" class="form-control ben-table" placeholder="Phone" style=" max-width: 130px"/>
+                </div>
+                
+                <!--input matInput formControlName="phone" class="form-control small-input ben-table" placeholder="Phone" /-->
+              </td>
+
+
+
+              
+              <td><input matInput formControlName="email" class="form-control ben-table" placeholder="Email" /></td>
+
+              <td>
+                <mat-checkbox formControlName="loginAllowed"></mat-checkbox>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="removeBeneficiary(i)"><mat-icon
+                    fontIcon="delete"></mat-icon></button>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+        <span class="text-center error" style="color:red">{{beneficiariesMessage}}</span>
+
+
+
+        <div class="row">
+
+          <div class="col-md-2">
+
+            <button type="button" class="btn btn-outline-primary" mat-raised-button (click)="addBeneficiary()"> <mat-icon
+                fontIcon="add"></mat-icon>
+              Add Beneficiary</button>
+          </div>
+          <div class="col-md-6"></div>
+
+          <div class="col-md-2">
+            <button type="button" class="btn btn-warning" mat-raised-button color="warning"
+              style="margin-right: 5px;" (click)="updatePolicy()">Save Policy</button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-outline-primary" mat-raised-button color="primary" type="button"
+              (click)="cancel()">Cancel</button>
+          </div>
+          <div class="col-md-10"></div>
+        
+        </div>
+
+      </div>
+
+
+
+
+    </form>
+  </mat-card-content>
+
+</div>

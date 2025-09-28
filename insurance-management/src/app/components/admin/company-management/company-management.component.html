@@ -1,0 +1,173 @@
+<app-navigation></app-navigation>
+
+<div class="card px-5 py-5">
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <h4 class="card-title">Company Management</h4>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field appearance="fill" floatLabel="always" class="search-field">
+        <mat-label>Search Companies</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4 text-end">
+      <button mat-raised-button color="primary" (click)="showAddForm()">
+        <mat-icon>add</mat-icon>
+        Add Company
+      </button>
+    </div>
+  </div>
+
+  <!-- Company Form -->
+  <mat-card *ngIf="showForm" class="mb-4">
+    <mat-card-header>
+      <mat-card-title>{{ isEditing ? 'Edit Company' : 'Add New Company' }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Company Name *</mat-label>
+              <input matInput formControlName="name" placeholder="Enter company name">
+              <mat-error>{{ getFieldError('name') }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Registration Number</mat-label>
+              <input matInput formControlName="registrationNumber" placeholder="Enter registration number">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Address *</mat-label>
+              <input matInput formControlName="address" placeholder="Enter address">
+              <mat-error>{{ getFieldError('address') }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>City *</mat-label>
+              <input matInput formControlName="city" placeholder="Enter city">
+              <mat-error>{{ getFieldError('city') }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Region/State *</mat-label>
+              <input matInput formControlName="region" placeholder="Enter region">
+              <mat-error>{{ getFieldError('region') }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Postal Code *</mat-label>
+              <input matInput formControlName="postalCode" placeholder="Enter postal code">
+              <mat-error>{{ getFieldError('postalCode') }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Country *</mat-label>
+              <input matInput formControlName="country" placeholder="Enter country">
+              <mat-error>{{ getFieldError('country') }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phoneNumber" placeholder="Enter phone number">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" placeholder="Enter email">
+              <mat-error>{{ getFieldError('email') }}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Website</mat-label>
+              <input matInput formControlName="website" placeholder="Enter website URL">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!companyForm.valid">
+              {{ isEditing ? 'Update' : 'Create' }} Company
+            </button>
+            <button mat-button type="button" (click)="cancelForm()" class="ms-2">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Companies Table -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Company Name</th>
+      <td mat-cell *matCellDef="let company">{{ company.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef>Address</th>
+      <td mat-cell *matCellDef="let company">
+        {{ company.address }}, {{ company.city }}, {{ company.region }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef>Country</th>
+      <td mat-cell *matCellDef="let company">{{ company.country }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef>Phone</th>
+      <td mat-cell *matCellDef="let company">{{ company.phoneNumber || 'N/A' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let company">{{ company.email || 'N/A' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let company">
+        <button mat-icon-button color="primary" (click)="editCompany(company)" title="Edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteCompany(company)" title="Delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <div *ngIf="companies.length === 0" class="text-center mt-4">
+    <p>No companies found. Add your first company to get started.</p>
+  </div>
+</div>

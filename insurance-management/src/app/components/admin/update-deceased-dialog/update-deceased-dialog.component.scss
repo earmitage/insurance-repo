@@ -1,0 +1,20 @@
+.update-card {
+    width: 100%;
+    min-width: 500px;
+    min-height: 300px;
+    /* Limit the max-width of the login box */
+    //box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    /* Rounded corners for the entire card */
+    overflow: hidden;
+    /* Ensure rounded corners apply to inner content as well */
+}
+mat-card-header {
+    background-color: #e98c00;
+    color: white;
+    text-align: center;
+    padding: 20px 16px;
+    /* Add more padding for a bigger header area */
+    border-radius: 8px 8px 0 0;
+    /* Rounded corners for the header */
+}
