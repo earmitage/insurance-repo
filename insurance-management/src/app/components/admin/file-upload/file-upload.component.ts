@@ -64,7 +64,7 @@ export class FileUploadComponent implements OnInit {
   rawData: any[] = [];
   headers: string[] = [];
   columnMapping: ColumnMapping = {};
-  entityType: 'policy' | 'beneficiary' = 'policy';
+  entityType: 'policy' | 'beneficiary' | 'combined' = 'policy';
 
   // Company selection for policies
   companies: Company[] = [];
@@ -165,6 +165,17 @@ export class FileUploadComponent implements OnInit {
       const result = await this.fileParser.parseFile(this.selectedFile);
       this.rawData = result.data;
       this.headers = result.headers;
+      
+      // Auto-detect the entity type based on headers
+      const detectedType = this.columnMapper.detectEntityType(this.headers);
+      if (detectedType !== this.entityType) {
+        this.entityType = detectedType;
+        this.global.showSuccess(
+          'Entity type auto-detected', 
+          `Detected as '${detectedType}' format based on column headers`
+        );
+      }
+      
       this.prepareHeaderMappingData();
       this.autoMapColumns();
       this.currentStep = 1;
@@ -176,7 +187,6 @@ export class FileUploadComponent implements OnInit {
     }
   }
 
-  // Column mapping methods
   prepareHeaderMappingData(): void {
     this.headerMappingData = this.headers.map(header => ({
       header,
@@ -284,7 +294,7 @@ export class FileUploadComponent implements OnInit {
     }
 
     // Numeric fields
-    if (['coverageAmount', 'monthlyPremium', 'sharePercentage'].includes(field)) {
+    if (['coverageAmount', 'monthlyPremium', 'sharePercentage', 'policyCoverageAmount', 'beneficiaryCoveragePercent'].includes(field)) {
       const numValue = parseFloat(value);
       return isNaN(numValue) ? null : numValue;
     }
@@ -317,16 +327,22 @@ export class FileUploadComponent implements OnInit {
       return;
     }
 
-    // For policy uploads, company selection is required
-    if (this.entityType === 'policy' && !this.selectedCompanyId) {
+    // For policy and combined uploads, company selection is required
+    /*
+    if ((this.entityType === 'policy' || this.entityType === 'combined') && !this.selectedCompanyId) {
       this.global.showError('Please select a company for policy upload', 'Upload Error');
       return;
     }
+    */
 
     this.isProcessing = true;
     try {
-      const endpoint = this.entityType === 'policy' ? '/admin/upload/policies' : '/admin/upload/beneficiaries';
-      const companyId = this.entityType === 'policy' ? this.selectedCompanyId : undefined;
+      const endpoint = this.entityType === 'combined'
+        ? '/admin/upload/combined-policies'
+        : this.entityType === 'policy'
+          ? '/admin/upload/policies'
+          : '/admin/upload/beneficiaries';
+      const companyId = (this.entityType === 'policy' || this.entityType === 'combined') ? this.selectedCompanyId : undefined;
 
       const result = await this.adminService.uploadData(endpoint, this.getValidRows(), companyId).toPromise();
 

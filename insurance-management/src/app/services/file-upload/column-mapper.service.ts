@@ -17,11 +17,87 @@ export class ColumnMapperService {
     'idType', 'countryCode', 'phone', 'email', 'loginAllowed', 'deceased', 'deceasedDate'
   ];
 
-  getAvailableFields(entityType: 'policy' | 'beneficiary'): string[] {
+  private readonly combinedFields = [
+    'policyholderId', 'policyholderName', 'policyholderSurname',
+    'policyholderPhysicalAddress', 'policyholderEmail', 'policyholderContactNumber',
+    'insuranceProvider', 'policyNumber', 'policyType', 'policyCoverageAmount',
+    'beneficiaryId', 'beneficiaryName', 'beneficiarySurname',
+    'beneficiaryRelationship', 'beneficiaryContactNumber', 'beneficiaryCoveragePercent'
+  ];
+
+  // Explicit field mappings for common CSV header patterns
+  private readonly fieldAliases: { [key: string]: string } = {
+    // Policyholder aliases (exact CSV headers from template)
+    'policyholderid': 'policyholderId',
+    'policyholdername': 'policyholderName',
+    'policyholdersurname': 'policyholderSurname',
+    'policyholderphysicaladdress': 'policyholderPhysicalAddress',
+    'policyholderemail': 'policyholderEmail',
+    'policyholdercontactnumber': 'policyholderContactNumber',
+
+    // Policy aliases (exact CSV headers from template)
+    'insuranceprovider': 'insuranceProvider',
+    'policynumber': 'policyNumber',
+    'policytypelifefuneral': 'policyType',
+    'policytype': 'policyType',
+    'policycoverageamount': 'policyCoverageAmount',
+
+    // Beneficiary aliases (exact CSV headers from template)
+    'beneficiaryid': 'beneficiaryId',
+    'beneficiaryname': 'beneficiaryName',
+    'beneficiarysurname': 'beneficiarySurname',
+    'beneficiaryrelationship': 'beneficiaryRelationship',
+    'beneficiarycontactnumber': 'beneficiaryContactNumber',
+    'beneficiarycoverage': 'beneficiaryCoveragePercent',
+    'beneficiarycoveragepercent': 'beneficiaryCoveragePercent',
+  };
+
+  getAvailableFields(entityType: 'policy' | 'beneficiary' | 'combined'): string[] {
+    if (entityType === 'combined') return this.combinedFields;
     return entityType === 'policy' ? this.policyFields : this.beneficiaryFields;
   }
 
-  autoMapColumns(headers: string[], entityType: 'policy' | 'beneficiary'): ColumnMapping {
+  /**
+   * Detects the most likely entity type based on the CSV headers
+   */
+  detectEntityType(headers: string[]): 'policy' | 'beneficiary' | 'combined' {
+    const normalizedHeaders = headers.map(h => this.normalizeString(h));
+    
+    // Check for policyholder-specific fields (indicators of combined format)
+    const hasPolicyholderFields = normalizedHeaders.some(h => 
+      h.includes('policyholder') || h.startsWith('ph')
+    );
+    
+    // Check for beneficiary fields
+    const hasBeneficiaryFields = normalizedHeaders.some(h => 
+      h.includes('beneficiary') || h.includes('relationship') || h.includes('sharepercentage')
+    );
+    
+    // Check for policy fields
+    const hasPolicyFields = normalizedHeaders.some(h => 
+      h.includes('policy') || h.includes('insurance') || h.includes('coverage') || h.includes('premium')
+    );
+    
+    // If has policyholder fields, it's definitely combined format
+    if (hasPolicyholderFields) {
+      return 'combined';
+    }
+    
+    // If has both policy and beneficiary fields, it's combined
+    if (hasPolicyFields && hasBeneficiaryFields) {
+      return 'combined';
+    }
+    
+    // If has only beneficiary fields
+    if (hasBeneficiaryFields && !hasPolicyFields) {
+      return 'beneficiary';
+    }
+    
+    // Default to policy
+    return 'policy';
+  }
+
+  autoMapColumns(headers: string[], entityType: 'policy' | 'beneficiary' | 'combined'): ColumnMapping {
     const mapping: ColumnMapping = {};
     const availableFields = this.getAvailableFields(entityType);
 
@@ -37,13 +113,23 @@ export class ColumnMapperService {
 
   private findBestMatch(header: string, fields: string[]): string | null {
     const cleanHeader = this.normalizeString(header);
+
+    // Check alias map first (highest priority)
+    if (this.fieldAliases[cleanHeader]) {
+      const aliasField = this.fieldAliases[cleanHeader];
+      // Verify the alias field is in the available fields
+      if (fields.includes(aliasField)) {
+        return aliasField;
+      }
+    }
+
     let bestMatch = null;
     let highestScore = 0;
 
     for (const field of fields) {
       const cleanField = this.normalizeString(field);
 
-      // Exact match (highest priority)
+      // Exact match (high priority)
       if (cleanHeader === cleanField) {
         return field;
       }

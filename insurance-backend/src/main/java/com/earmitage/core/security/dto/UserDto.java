@@ -56,7 +56,7 @@ public class UserDto {
         this.token = entity.getToken();
         this.contactType = entity.getContactType();
         this.enabled = entity.getEnabled();
-        this.locked = entity.getLocked();
+        this.locked = entity.getLocked() == null? false:entity.getLocked();
         this.token = entity.getToken();
 
     }

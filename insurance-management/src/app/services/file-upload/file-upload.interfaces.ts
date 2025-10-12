@@ -5,7 +5,7 @@ export interface ColumnMapping {
 export interface MappingTemplate {
   name: string;
   mapping: ColumnMapping;
-  entityType: 'policy' | 'beneficiary';
+  entityType: 'policy' | 'beneficiary' | 'combined';
   createdDate: Date;
 }
 

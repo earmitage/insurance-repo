@@ -1,6 +1,11 @@
 <nav class="navbar">
   <div class="navbar-container">
-    <a href="" class="navbar-logo"><img src="assets/images/logo-small.png" alt=""></a>
+    <a  *ngIf="role == 'ROLE_POLICY_HOLDER'"  href="/policies" class="navbar-logo"><img src="assets/images/logo-small.png" alt=""></a>
+
+    <a  *ngIf="role == 'ROLE_ADMIN'"  href="/admin/policies" class="navbar-logo"><img src="assets/images/logo-small.png" alt=""></a>
+
+
+
     <ul class="navbar-menu">
       <li *ngIf="role == 'ROLE_POLICY_HOLDER'" class="navbar-item"><a href="/policies" class="navbar-link">Home</a></li>
       <!--
@@ -13,12 +18,10 @@
       <li *ngIf="role == 'ROLE_ADMIN'" class="navbar-item"><a href="/admin" class="navbar-link">Users</a></li>
       <li *ngIf="role == 'ROLE_ADMIN'" class="navbar-item"><a href="/admin/policies" class="navbar-link">All Policies</a></li>
       <li *ngIf="role == 'ROLE_ADMIN'" class="navbar-item"><a href="/admin/file-upload" class="navbar-link">File Upload</a></li>
-      <li class="navbar-item"><a href="/contact" class="navbar-link">Contact</a></li>
-
     </ul>
 
     <button *ngIf="role == 'ROLE_POLICY_HOLDER'"  class="navbar-link profile-btn" (click)="myProfile()">My Profile</button>
-    <button class="navbar-link logout-btn" (click)="logout()">{{logoutLabel}}</button>
+    <button  class="navbar-link logout-btn" (click)="logout()">{{logoutLabel}}</button>
   </div>
 </nav>
 <div class="row">

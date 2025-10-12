@@ -20,7 +20,7 @@ export class TemplateStorageService {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(templates));
   }
 
-  getTemplates(entityType?: 'policy' | 'beneficiary'): MappingTemplate[] {
+  getTemplates(entityType?: 'policy' | 'beneficiary' | 'combined'): MappingTemplate[] {
     const stored = localStorage.getItem(this.STORAGE_KEY);
     const templates = stored ? JSON.parse(stored) : [];
 
@@ -31,17 +31,17 @@ export class TemplateStorageService {
     return templates;
   }
 
-  deleteTemplate(name: string, entityType: 'policy' | 'beneficiary'): void {
+  deleteTemplate(name: string, entityType: 'policy' | 'beneficiary' | 'combined'): void {
     const templates = this.getTemplates().filter(t => !(t.name === name && t.entityType === entityType));
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(templates));
   }
 
-  loadTemplate(name: string, entityType: 'policy' | 'beneficiary'): MappingTemplate | null {
+  loadTemplate(name: string, entityType: 'policy' | 'beneficiary' | 'combined'): MappingTemplate | null {
     const templates = this.getTemplates();
     return templates.find(t => t.name === name && t.entityType === entityType) || null;
   }
 
-  templateExists(name: string, entityType: 'policy' | 'beneficiary'): boolean {
+  templateExists(name: string, entityType: 'policy' | 'beneficiary' | 'combined'): boolean {
     return this.getTemplates().some(t => t.name === name && t.entityType === entityType);
   }
 }

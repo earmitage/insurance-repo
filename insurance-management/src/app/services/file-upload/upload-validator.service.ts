@@ -6,14 +6,16 @@ import { ValidationError } from './file-upload.interfaces';
 })
 export class UploadValidatorService {
 
-  validateData(data: any[], entityType: 'policy' | 'beneficiary'): ValidationError[] {
+  validateData(data: any[], entityType: 'policy' | 'beneficiary' | 'combined'): ValidationError[] {
     const errors: ValidationError[] = [];
 
     data.forEach((row, index) => {
       if (entityType === 'policy') {
         errors.push(...this.validatePolicyRow(row, index + 1));
-      } else {
+      } else if (entityType === 'beneficiary') {
         errors.push(...this.validateBeneficiaryRow(row, index + 1));
+      } else if (entityType === 'combined') {
+        errors.push(...this.validateCombinedRow(row, index + 1));
       }
     });
 
@@ -33,6 +35,7 @@ export class UploadValidatorService {
       });
     }
 
+    /*
     if (!row.insuranceCompany?.toString().trim()) {
       errors.push({
         row: rowNumber,
@@ -41,6 +44,7 @@ export class UploadValidatorService {
         severity: 'error'
       });
     }
+      */
 
     if (!row.policyType?.toString().trim()) {
       errors.push({
@@ -192,6 +196,113 @@ export class UploadValidatorService {
         message: 'Invalid deceased date format (use YYYY-MM-DD)',
         severity: 'error'
       });
+    }
+
+    return errors;
+  }
+
+  private validateCombinedRow(row: any, rowNumber: number): ValidationError[] {
+    const errors: ValidationError[] = [];
+
+    // Validate policyholder required fields
+    if (!row.policyholderName?.toString().trim()) {
+      errors.push({
+        row: rowNumber,
+        field: 'policyholderName',
+        message: 'Policyholder name is required',
+        severity: 'error'
+      });
+    }
+
+    if (!row.policyholderSurname?.toString().trim()) {
+      errors.push({
+        row: rowNumber,
+        field: 'policyholderSurname',
+        message: 'Policyholder surname is required',
+        severity: 'error'
+      });
+    }
+
+    if (!row.policyholderEmail?.toString().trim()) {
+      errors.push({
+        row: rowNumber,
+        field: 'policyholderEmail',
+        message: 'Policyholder email is required',
+        severity: 'error'
+      });
+    } else if (!this.isValidEmail(row.policyholderEmail.toString())) {
+      errors.push({
+        row: rowNumber,
+        field: 'policyholderEmail',
+        message: 'Invalid policyholder email format',
+        severity: 'error'
+      });
+    }
+
+    // Validate policy required fields
+    if (!row.policyNumber?.toString().trim()) {
+      errors.push({
+        row: rowNumber,
+        field: 'policyNumber',
+        message: 'Policy number is required',
+        severity: 'error'
+      });
+    }
+
+    if (!row.insuranceProvider?.toString().trim()) {
+      errors.push({
+        row: rowNumber,
+        field: 'insuranceProvider',
+        message: 'Insurance provider is required',
+        severity: 'error'
+      });
+    }
+
+    if (!row.policyType?.toString().trim()) {
+      errors.push({
+        row: rowNumber,
+        field: 'policyType',
+        message: 'Policy type is required',
+        severity: 'error'
+      });
+    } else {
+      const validTypes = ['life', 'funeral', 'LIFE', 'FUNERAL'];
+      if (!validTypes.includes(row.policyType.toString().trim())) {
+        errors.push({
+          row: rowNumber,
+          field: 'policyType',
+          message: 'Policy type must be LIFE or FUNERAL',
+          severity: 'error'
+        });
+      }
+    }
+
+    // Validate coverage amount
+    if (row.policyCoverageAmount !== undefined && row.policyCoverageAmount !== null && row.policyCoverageAmount !== '') {
+      const coverage = parseFloat(row.policyCoverageAmount);
+      if (isNaN(coverage) || coverage <= 0) {
+        errors.push({
+          row: rowNumber,
+          field: 'policyCoverageAmount',
+          message: 'Coverage amount must be a positive number',
+          severity: 'error'
+        });
+      }
+    }
+
+    // Validate beneficiary fields (if provided)
+    if (row.beneficiaryName?.toString().trim()) {
+      if (row.beneficiaryCoveragePercent !== undefined && row.beneficiaryCoveragePercent !== null && row.beneficiaryCoveragePercent !== '') {
+        const percentage = parseFloat(row.beneficiaryCoveragePercent);
+        if (isNaN(percentage) || percentage <= 0 || percentage > 100) {
+          errors.push({
+            row: rowNumber,
+            field: 'beneficiaryCoveragePercent',
+            message: 'Beneficiary coverage percent must be between 0.1 and 100',
+            severity: 'error'
+          });
+        }
+      }
     }
 
     return errors;

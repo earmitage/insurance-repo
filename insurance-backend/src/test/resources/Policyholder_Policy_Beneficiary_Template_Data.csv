@@ -1,0 +1,52 @@
+Policyholder_ID;Policyholder_Name;Policyholder_Surname;Policyholder_Physical_Address;Policyholder_Email;Policyholder_Contact_Number;Insurance provider;Policy_Number;Policy_Type (Life/Funeral);Policy_Coverage_Amount;Beneficiary_ID;Beneficiary_Name;Beneficiary_Surname;Beneficiary_Relationship;Beneficiary_Contact_Number;Beneficiary_Coverage_%
+8501230145082;Thabo;Molefe;123 Mandela Street, Soweto, Johannesburg;thabo.molefe@gmail.com;0821234567;Old Mutual;POL-2024-001;LIFE;500000;9208150123084;Nomsa;Molefe;Spouse;0829876543;100
+7803145678091;Sipho;Dlamini;456 Church Road, Durban;sipho.dlamini@yahoo.com;0837654321;Sanlam;POL-2024-002;FUNERAL;50000;0112250134089;Zanele;Dlamini;Daughter;0834567890;100
+9205120145083;Lerato;Nkosi;789 Main Road, Cape Town;lerato.nkosi@outlook.com;0845678901;Liberty;POL-2024-003;LIFE;750000;8907145123087;Bongani;Nkosi;Son;0841234567;100
+6709230123084;Themba;Sithole;321 Victoria Street, Pretoria;themba.sithole@gmail.com;0712345678;Discovery Life;POL-2024-004;FUNERAL;35000;9411200145082;Precious;Sithole;Wife;0723456789;100
+8112150178092;Nomvula;Khumalo;654 Jan Smuts Avenue, Sandton;nomvula.khumalo@icloud.com;0826789012;Momentum;POL-2024-005;LIFE;1000000;0305180123085;Siyabonga;Khumalo;Son;0834567812;50
+8112150178092;Nomvula;Khumalo;654 Jan Smuts Avenue, Sandton;nomvula.khumalo@icloud.com;0826789012;Momentum;POL-2024-005;LIFE;1000000;9810210145083;Thandi;Khumalo;Daughter;0845678923;50
+9408180145087;Mandla;Zulu;987 Beyers Naude Drive, Randburg;mandla.zulu@webmail.co.za;0813456789;1Life;POL-2024-006;FUNERAL;45000;0201150178091;Lindiwe;Zulu;Mother;0823456789;100
+7506050123089;Busisiwe;Ngubane;246 Louis Botha Avenue, Orange Grove;busisiwe.ngubane@gmail.com;0798765432;Hollard;POL-2024-007;LIFE;600000;7801230145082;Sibusiso;Ngubane;Husband;0787654321;100
+8903120145086;Kagiso;Mthembu;135 Oxford Road, Rosebank;kagiso.mthembu@hotmail.com;0827891234;Metropolitan;POL-2024-008;FUNERAL;40000;1105080123088;Nkululeko;Mthembu;Son;0836789012;100
+9601080178095;Zanele;Mahlangu;579 Rivonia Road, Sandton;zanele.mahlangu@gmail.com;0843456789;Clientele Life;POL-2024-009;LIFE;850000;9409150145084;Mpho;Mahlangu;Brother;0856789012;100
+8207200123087;Thandi;Mbatha;802 Empire Road, Parktown;thandi.mbatha@yahoo.com;0764567890;African Unity;POL-2024-010;FUNERAL;38000;0502230178093;Ayanda;Mbatha;Daughter;0778901234;100
+7710110145081;Sello;Mokoena;963 Commissioner Street, Johannesburg CBD;sello.mokoena@gmail.com;0812345678;Assupol;POL-2024-011;LIFE;450000;8103150123086;Dikeledi;Mokoena;Wife;0823456789;100
+9104250178094;Ntombi;Radebe;147 Sandton Drive, Sandton;ntombi.radebe@outlook.com;0835678901;Nedgroup Life;POL-2024-012;FUNERAL;55000;1208190123089;Lunga;Radebe;Son;0845678901;100
+8511300145088;Vusi;Cele;258 William Nicol Drive, Bryanston;vusi.cele@gmail.com;0726789012;AVBOB;POL-2024-013;LIFE;520000;8906120145085;Nomsa;Cele;Sister;0738901234;100
+7808050123090;Palesa;Ntuli;369 Republic Road, Randburg;palesa.ntuli@webmail.co.za;0847890123;Absa Life;POL-2024-014;FUNERAL;42000;0401100178092;Thabiso;Ntuli;Son;0856789012;100
+9302140145082;Mpho;Maseko;741 Hendrik Verwoerd Drive, Centurion;mpho.maseko@gmail.com;0813456789;Standard Bank Insurance;POL-2024-015;LIFE;900000;9607180123088;Kelebogile;Maseko;Wife;0825678901;100
+8605180178096;Nhlanhla;Zungu;852 Lynnwood Road, Pretoria;nhlanhla.zungu@hotmail.com;0834567890;FNB Life;POL-2024-016;FUNERAL;48000;1109250145087;Simphiwe;Zungu;Daughter;0845678912;100
+7412250123085;Bongani;Shabalala;963 Grayston Drive, Sandton;bongani.shabalala@yahoo.com;0725678901;MiWay Life;POL-2024-017;LIFE;680000;7809300123084;Zanele;Shabalala;Spouse;0736789012;100
+9206300145089;Lindiwe;Naidoo;159 Umhlanga Rocks Drive, Durban;lindiwe.naidoo@gmail.com;0846789012;Discovery Life;POL-2024-018;FUNERAL;36000;0103150178091;Sithembiso;Naidoo;Son;0857890123;100
+8109100178093;Sibusiso;Dube;357 Marine Drive, Port Elizabeth;sibusiso.dube@outlook.com;0717890123;Old Mutual;POL-2024-019;LIFE;550000;8504200145083;Nokuthula;Dube;Wife;0728901234;100
+7503200123086;Nkosi;Mkhize;468 Beach Road, Durban North;nkosi.mkhize@gmail.com;0828901234;Sanlam;POL-2024-020;FUNERAL;46000;1006110123087;Thulani;Mkhize;Brother;0839012345;100
+9407150145084;Ayanda;Buthelezi;579 Musgrave Road, Durban;ayanda.buthelezi@webmail.co.za;0839012345;Liberty;POL-2024-021;LIFE;720000;9801250178094;Siphokazi;Buthelezi;Mother;0841234567;100
+8808250178091;Thandiwe;Ndlovu;681 Florida Road, Durban;thandiwe.ndlovu@hotmail.com;0741234567;Momentum;POL-2024-022;FUNERAL;44000;1204090145086;Musa;Ndlovu;Son;0752345678;100
+7611050123088;Siyabonga;Mazibuko;792 Smith Street, Durban CBD;siyabonga.mazibuko@gmail.com;0852345678;1Life;POL-2024-023;LIFE;580000;8002150123089;Nonhlanhla;Mazibuko;Wife;0863456789;100
+9101280145087;Nomfundo;Gumede;903 West Street, Durban;nomfundo.gumede@yahoo.com;0763456789;Hollard;POL-2024-024;FUNERAL;39000;0809200178095;Sizwe;Gumede;Son;0774567890;100
+8404100178092;Lungile;Msomi;124 Berea Road, Durban;lungile.msomi@outlook.com;0874567890;Metropolitan;POL-2024-025;LIFE;640000;8907050145082;Zandile;Msomi;Sister;0885678901;100
+7207250123083;Andile;Khoza;235 Davenport Road, Glenwood;andile.khoza@gmail.com;0715678901;Clientele Life;POL-2024-026;FUNERAL;41000;0504130123084;Ntokozo;Khoza;Daughter;0726789012;100
+9510200145085;Thulisile;Mahlangu;346 Umbilo Road, Durban;thulisile.mahlangu@webmail.co.za;0826789012;African Unity;POL-2024-027;LIFE;780000;9908110178096;Mlungisi;Mahlangu;Husband;0837890123;100
+8312150178097;Simphiwe;Mkhwanazi;457 Argyle Road, Durban;simphiwe.mkhwanazi@hotmail.com;0737890123;Assupol;POL-2024-028;FUNERAL;47000;0612250145088;Nonkululeko;Mkhwanazi;Wife;0748901234;100
+7609300123081;Phumzile;Ntombela;568 Diakonia Avenue, Durban;phumzile.ntombela@gmail.com;0848901234;Nedgroup Life;POL-2024-029;LIFE;590000;8203100123085;Khethiwe;Ntombela;Mother;0859012345;100
+9203050145086;Zinhle;Mdluli;679 Cowey Road, Pinetown;zinhle.mdluli@yahoo.com;0759012345;AVBOB;POL-2024-030;FUNERAL;43000;1107280178094;Sandile;Mdluli;Son;0761234567;100
+8706120178098;Bheki;Myeni;781 Old Main Road, Pinetown;bheki.myeni@outlook.com;0831234567;Absa Life;POL-2024-031;LIFE;660000;9105050145089;Nomusa;Myeni;Wife;0842345678;100
+7410080123082;Dudu;Zuma;892 Josiah Gumede Road, Durban;dudu.zuma@gmail.com;0742345678;Standard Bank Insurance;POL-2024-032;FUNERAL;37000;0208170123086;Philani;Zuma;Son;0753456789;100
+9109230145083;Wiseman;Ngcobo;913 Queen Nandi Drive, Durban;wiseman.ngcobo@webmail.co.za;0853456789;FNB Life;POL-2024-033;LIFE;710000;9502280178093;Zanele;Ngcobo;Spouse;0864567890;100
+8502180178099;Ntombifuthi;Hadebe;124 Peter Mokaba Road, Durban;ntombifuthi.hadebe@hotmail.com;0724567890;MiWay Life;POL-2024-034;FUNERAL;49000;0910090145084;Mandla;Hadebe;Brother;0735678901;100
+7805050123089;Jabulani;Mthethwa;235 Umgeni Road, Durban;jabulani.mthethwa@gmail.com;0835678901;Discovery Life;POL-2024-035;LIFE;800000;8201150123087;Thembi;Mthethwa;Wife;0846789012;100
+9308140145081;Nokuthula;Shezi;346 Stanger Street, Durban CBD;nokuthula.shezi@yahoo.com;0746789012;Old Mutual;POL-2024-036;FUNERAL;51000;1006200178095;Senzo;Shezi;Son;0757890123;100
+8611250178094;Mduduzi;Gcaba;457 Victoria Embankment, Durban;mduduzi.gcaba@outlook.com;0857890123;Sanlam;POL-2024-037;LIFE;620000;9009100145085;Thobile;Gcaba;Sister;0868901234;100
+7308100123084;Lindiwe;Ntshangase;568 Albert Park Road, Durban;lindiwe.ntshangase@gmail.com;0718901234;Liberty;POL-2024-038;FUNERAL;40000;0407050123088;Sizwe;Ntshangase;Son;0729012345;100
+9405050145088;Sanele;Mhlongo;679 Archie Gumede Road, Durban;sanele.mhlongo@webmail.co.za;0829012345;Momentum;POL-2024-039;LIFE;740000;9803120178092;Nompumelelo;Mhlongo;Wife;0831234567;100
+8208200178095;Nonhlanhla;Zwane;781 Brickfield Road, Durban;nonhlanhla.zwane@hotmail.com;0731234567;1Life;POL-2024-040;FUNERAL;45000;0611150145087;Nkosinathi;Zwane;Son;0742345678;100
+7511280123086;Thamsanqa;Vilakazi;892 Windermere Road, Durban;thamsanqa.vilakazi@gmail.com;0842345678;Hollard;POL-2024-041;LIFE;570000;7906200123083;Patience;Vilakazi;Mother;0853456789;100
+9202150145089;Nosipho;Radebe;913 Bartle Road, Durban;nosipho.radebe@yahoo.com;0753456789;Metropolitan;POL-2024-042;FUNERAL;42000;1108050178096;Khanyisile;Radebe;Daughter;0764567890;100
+8805300178091;Goodwill;Ngwenya;124 Vause Road, Durban;goodwill.ngwenya@outlook.com;0864567890;Clientele Life;POL-2024-043;LIFE;690000;9204080145081;Busisiwe;Ngwenya;Wife;0875678901;100
+7604150123087;Ntombenhle;Kunene;235 Manning Road, Durban;ntombenhle.kunene@gmail.com;0725678901;African Unity;POL-2024-044;FUNERAL;38000;0302230123089;Themba;Kunene;Son;0736789012;100
+9107080145082;Mthokozisi;Magubane;346 Bulwer Road, Durban;mthokozisi.magubane@webmail.co.za;0836789012;Assupol;POL-2024-045;LIFE;820000;9505150178094;Thokozani;Magubane;Brother;0847890123;100
+8409220178096;Ntombizonke;Khanyile;457 Sydenham Road, Durban;ntombizonke.khanyile@hotmail.com;0747890123;Nedgroup Life;POL-2024-046;FUNERAL;46000;1003090145086;Sthembiso;Khanyile;Son;0758901234;100
+7212050123085;Hlengiwe;Majola;568 Warwick Avenue, Durban;hlengiwe.majola@gmail.com;0858901234;AVBOB;POL-2024-047;LIFE;610000;7805250123082;Sandile;Majola;Husband;0869012345;100
+9506300145084;Bhekisisa;Maphumulo;679 Denis Hurley Street, Durban;bhekisisa.maphumulo@yahoo.com;0769012345;Absa Life;POL-2024-048;FUNERAL;44000;0710180178093;Philisiwe;Maphumulo;Wife;0771234567;100
+8803100178092;Nonkululeko;Mkhize;781 Johannes Nkosi Street, Durban;nonkululeko.mkhize@outlook.com;0821234567;Standard Bank Insurance;POL-2024-049;LIFE;760000;9201050145088;Lindani;Mkhize;Son;0832345678;100
+7506200123088;Siyanda;Zungu;892 Anton Lembede Street, Durban;siyanda.zungu@gmail.com;0732345678;FNB Life;POL-2024-050;FUNERAL;41000;0109120123084;Mpilenhle;Zungu;Daughter;0743456789;100

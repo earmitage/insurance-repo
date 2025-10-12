@@ -25,6 +25,7 @@ export class FileParserService {
       Papa.parse(file, {
         header: true,
         skipEmptyLines: true,
+        delimiter: '', // Auto-detect delimiter (comma, semicolon, tab, etc.)
         transformHeader: (header: string) => header.trim(),
         complete: (result) => {
           if (result.errors.length > 0) {

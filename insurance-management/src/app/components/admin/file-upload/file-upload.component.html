@@ -17,10 +17,11 @@
             <mat-select [(value)]="entityType" (selectionChange)="onEntityTypeChange()">
               <mat-option value="policy">Policies</mat-option>
               <mat-option value="beneficiary">Beneficiaries</mat-option>
+              <mat-option value="combined">Combined (Policyholder + Policy + Beneficiary)</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-12" *ngIf="entityType === 'policy'">
+        <div class="col-12" *ngIf="entityType === 'policy' || entityType === 'combined'">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Company</mat-label>
             <mat-select [(value)]="selectedCompanyId" required>

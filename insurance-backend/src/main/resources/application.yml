@@ -61,8 +61,8 @@ payfast:
    merchantKey: '46f0cd694581a'
    payfastUrl: 'https://sandbox.payfast.co.za/eng/process'
    secretKey: 'jt7NOE43FZPn'
-   replyUrl: 'https://9756d317a9e5.ngrok-free.app/policies'
-   baseAppUrl: 'https://88315b30e583.ngrok-free.app/insurance-backend/'
+   replyUrl: 'https://4b0ab5e3e8a1.ngrok-free.app/policies'
+   baseAppUrl: 'https://b8ebc74ea22e.ngrok-free.app/insurance-backend/'
    domains: ['www.payfast.co.za','sandbox.payfast.co.za','w1w.payfast.co.za','w2w.payfast.co.za']
    validationUrl: 'https://sandbox.payfast.co.za/eng/query/validate'
       
