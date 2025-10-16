@@ -30,7 +30,7 @@ export class AdminService {
   }
 
   uploadData(endpoint: string, data: any[], companyId?: string): Observable<UploadResult> {
-    const payload = companyId ? { data, companyId } : data;
+    const payload =  { data };
     return this.http.post<UploadResult>(`${this.global.baseUrl}${endpoint}`, payload, this.options)
       .pipe(map(response => {
         return response;
