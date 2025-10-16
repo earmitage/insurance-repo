@@ -12,5 +12,4 @@ import lombok.Setter;
 public class CombinedUploadRequest {
 	
     private List<PolicyholderPolicyBeneficiaryUpload> data;
-    private Long companyId;
 }

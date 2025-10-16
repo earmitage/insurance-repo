@@ -5,14 +5,11 @@ spring:
 
 app:
   url: /insurance-backend
-  insdeployAdmin: 'insDeployAdmin'
-  insdeployToken: 'cyaIns4345522'
-  insdeployContact: '+27733353882'
+  insdeployAdmin: 'test'
+  insdeployToken: 'test'
+  insdeployContact: '+27733000000'
   notifications:
     notificationsAppName: 'Insurance'
-    twilioAccountSid: 'ACe45e6a24671da4bbb978dfabb085436d'
-    twilioAuthToken: '68fc7f1f55d1b7c4ffb04d99e2c7747a'
-    twilioSourceNumber: '+27600868713'
     smsEnabled: false
 jwtTokenHeader: Authorization
 jwtSecret: app-secret

@@ -269,24 +269,6 @@ public class AdminController {
         int errorCount = 0;
 
         List<PolicyholderPolicyBeneficiaryUpload> data = request.getData();
-        Long companyId = request.getCompanyId();
-
-        // Validate company exists if companyId is provided
-        /*
-        Company company = null;
-        if (companyId != null) {
-            company = companyRepository.findById(companyId).orElse(null);
-            if (company == null) {
-                errors.add("Company with ID " + companyId + " not found");
-                UploadResult result = new UploadResult();
-                result.setSuccessCount(0);
-                result.setErrorCount(data.size());
-                result.setErrors(errors);
-                result.setMessage("Company validation failed");
-                return ResponseEntity.badRequest().body(result);
-            }
-        }
-        */
 
         for (int i = 0; i < data.size(); i++) {
             try {
